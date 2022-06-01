@@ -57,8 +57,11 @@ public class OrderServiceImpl implements OrderService {
                         .flatMap(order -> walletRepository.findById(walletSeller)
                                 .switchIfEmpty(Mono.error(new OrderNotFoundException("Wallet seller not found with id: " + walletSeller)))
                                 .flatMap(wallet -> {
+                                    if(!wallet.getCanSell()) {
+                                        return Mono.error(new OrderCreationException("You must link your bank or yank account"));
+                                    }
                                     if(wallet.getBalance() < order.getAmountBootcoin()) {
-                                        return Mono.error(new OrderCreationException("you don't have enough balance"));
+                                        return Mono.error(new OrderCreationException("You don't have enough balance"));
                                     }
 
                                     if(order.getPaymentMethod().equalsIgnoreCase("yanki")) {

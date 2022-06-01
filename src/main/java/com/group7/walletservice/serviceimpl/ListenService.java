@@ -42,7 +42,6 @@ public class ListenService {
                                 return walletRepository.save(wallet);
                             })
                             .subscribe();
-
                 }
                 else {
                     orderRepository.findByTransactionNumber(messageKafka.getMessage())
