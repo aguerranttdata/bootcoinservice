@@ -1,6 +1,6 @@
 package com.group7.walletservice.exception.movement;
 
-import com.group7.walletservice.exception.MessageResponse;
+import com.group7.walletservice.util.MessageResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;

@@ -1,4 +1,4 @@
-package com.group7.walletservice.exception;
+package com.group7.walletservice.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,6 +9,10 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class MessageResponse {
+public class MessageKafka {
+    private String type;
+    private String document;
+    private String number;
+    private Boolean success;
     private String message;
 }

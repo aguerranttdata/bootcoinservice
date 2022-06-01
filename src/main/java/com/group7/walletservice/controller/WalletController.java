@@ -3,8 +3,8 @@ package com.group7.walletservice.controller;
 import com.group7.walletservice.dto.PaymentMethodRequest;
 import com.group7.walletservice.dto.WalletRequest;
 import com.group7.walletservice.dto.WalletResponse;
-import com.group7.walletservice.exception.MessageResponse;
 import com.group7.walletservice.service.WalletService;
+import com.group7.walletservice.util.MessageResponse;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,10 +34,9 @@ public class WalletController {
         return walletService.save(walletRequest);
     }
 
-    @PostMapping("payment-method")
-    @ResponseStatus(HttpStatus.CREATED)
-    public Mono<MessageResponse> paymentMethod(@Valid @RequestBody PaymentMethodRequest paymentMethodRequest) {
-        return null;
+    @PostMapping("check-payment-method")
+    public Mono<MessageResponse> checkPaymentMethod(@Valid @RequestBody PaymentMethodRequest paymentMethodRequest) {
+        return walletService.checkPaymentMethod(paymentMethodRequest);
     }
 
 }

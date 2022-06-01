@@ -2,10 +2,7 @@ package com.group7.walletservice.serviceimpl;
 
 import com.group7.walletservice.dto.MovementRequest;
 import com.group7.walletservice.dto.MovementResponse;
-import com.group7.walletservice.dto.WalletResponse;
 import com.group7.walletservice.exception.movement.MovementCreationException;
-import com.group7.walletservice.exception.movement.MovementNotFoundException;
-import com.group7.walletservice.exception.wallet.WalletNotFoundException;
 import com.group7.walletservice.repository.MovementRepository;
 import com.group7.walletservice.repository.WalletRepository;
 import com.group7.walletservice.service.MovementService;
@@ -16,8 +13,6 @@ import org.springframework.cloud.stream.function.StreamBridge;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
-
-import java.util.Objects;
 
 @Service
 @AllArgsConstructor
@@ -55,10 +50,6 @@ public class MovementServiceImpl implements MovementService {
                                     .then(movementRepository.insert(movement));
                         }))
                 .map(MovementResponse::fromModel)
-//                .doOnSuccess(res -> {
-//                    if(!Objects.isNull(res.getDebitCard()))
-//                        streamBridge.send("accounts-topic", res);
-//                })
                 .onErrorMap(ex -> new MovementCreationException(ex.getMessage()))
                 .doOnError(ex -> log.error("Error save movement", ex));
     }

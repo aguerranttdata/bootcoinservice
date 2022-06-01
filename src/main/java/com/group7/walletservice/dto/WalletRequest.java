@@ -34,10 +34,6 @@ public class WalletRequest {
     @NotBlank(message = "phone cannot be empty")
     private String phone;
 
-    private String imei;
-
-    private String debitCard;
-
     @Email
     private String email;
 
