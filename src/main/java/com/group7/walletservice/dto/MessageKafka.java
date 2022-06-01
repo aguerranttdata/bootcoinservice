@@ -15,4 +15,5 @@ public class MessageKafka {
     private String number;
     private Boolean success;
     private String message;
+    private Double amount;
 }

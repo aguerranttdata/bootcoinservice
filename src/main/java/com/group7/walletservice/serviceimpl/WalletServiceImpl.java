@@ -58,7 +58,6 @@ public class WalletServiceImpl implements WalletService {
                 .flatMap(messageKafka -> walletRepository.findById(paymentMethodRequest.getWallet())
                         .switchIfEmpty(Mono.error(new WalletNotFoundException("Wallet not found with id: "+paymentMethodRequest.getWallet())))
                         .flatMap(existing -> {
-
                             if(paymentMethodRequest.getAccountType().equalsIgnoreCase("yanki")) {
                                 messageKafka.setNumber(existing.getPhone());
                             }
